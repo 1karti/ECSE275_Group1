@@ -177,6 +177,48 @@ If a ball is detected by the visual servoing system, it overrides the potential 
 - *Basic Immplementation: Each Robot has 2 initial main goals(Primary goals that are predefined), The Visual Servo Detects other non-target blobs(Blobs with a different colour than the assigned robot color) and A control Logic assign them to their respective robot as Secondary goals. They are added after reaching the first goal to allow the robots to travel and identify different feature hence increasing the probability of detecting different coloured blobs. The second Primary goal ensures the task assigned to robots ends(Termination Check).*
 - *In the Lua code, each robot calculates the positions of detected blobs (both target and non-target) within its field of view using its vision servo. Detected blobs are categorized based on their colors, with positions converted into global coordinates. The positions and labels of the detected blobs are stored in two data structures: globalBlobData for non-target blobs and targetBlobsData for blobs matching the robot's target color. These data structures are accessible via script functions, allowing other robots to query and retrieve relevant blob information for collaborative decision-making.*
 - *In Python, the communication is facilitated by querying globalBlobData and targetBlobsData from other robots. Each robot processes the retrieved data to identify relevant blobs based on its target color, ensuring no redundant or unnecessary goals are added. Detected target positions are compared against the robot's current goals and target data to avoid duplication. If a relevant blob is found, a temporary dummy object is created at the blob's position, and it is added as a secondary goal to the robot's goal queue. This workflow allows robots to dynamically adapt their goals based on shared information, enabling a cohesive and efficient multi-robot system.*
+  
 ## Results
+
+#### Key System Features
+
+**Robot Obstacle Avoidance**  
+In this demonstration, the robot successfully detects and avoids obstacles in its path using the potential field algorithm. The attractive force pulls the robot toward the goal, while the repulsive forces from obstacles guide it around them. This process ensures collision-free navigation in dynamic environments.
+
+<p align="center">
+  <img src="Images/robotobstacleavoidancevid.gif" alt="Robot Obstacle Avoidance" />
+</p>
+
+**Robot Seeking the Closest Ball**  
+In this clip, the robot demonstrates its ability to identify and seek the nearest ball using blob detection. Depth data helps prioritize the closest target, enabling the robot to execute tasks efficiently while avoiding distractions from other objects.
+
+<p align="center">
+  <img src="Images/robotseekingballvid.gif" alt="Robot Seeking Ball" />
+</p>
+
+**Robot Ball Detection and Goal Navigation**  
+Here, the robot detects a target ball using the vision system and successfully navigates toward it using the depth data from the vision sensor. The blending of potential fields and visual servoing allows smooth switching between modes, ensuring the robot tracks the ball efficiently.
+
+<p align="center">
+  <img src="Images/robottoballtogoalvid.gif" alt="Robot Navigating to Ball" />
+</p>
+
+
+---
+
+### Full Implementation Video
+
+We have compiled a comprehensive video showcasing the project’s entire implementation and functionality, uploaded to YouTube. The video demonstrates:
+1. **Initial Setup**: Overview of the simulated environment, including robots, obstacles, and goal objects.
+2. **Robot Navigation**: Visualizations of obstacle avoidance, target ball detection, and collaborative goal achievement.
+3. **Collision Avoidance**: The system incorporates conflict resolution and robot-robot repulsion to prevent collisions, ensuring smooth navigation in multi-robot environments.
+4. **Collaborative Robot Communication**: Robots are designed to share information about detected blobs and update their goals dynamically, enhancing task efficiency and adaptability.
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=zAbLN_3_CSA">
+    <img src="https://img.youtube.com/vi/zAbLN_3_CSA/0.jpg" alt="Multi-agent Differential Robot Path Planning with Visual Servoing Full Implementation">
+  </a>
+</div>
+
 
 ## Conclusion
